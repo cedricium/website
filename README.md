@@ -35,7 +35,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## TODOs
 
-- [ ] animations:
+- [x] animations:
   - when loading (text revealing)
   - hover effects on links
 - [ ] styling: grainy/papery background
