@@ -6,6 +6,10 @@
   --bluegray-400: #717bbc;
   --bluegray-500: #4e5ba6;
 
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --font-accent: 'Newsreader', Cambria, 'Hoefler Text', Utopia, Times,
+    'Times New Roman', serif;
 
   --animate-duration: 1s;
   --animate-delay: 0.25s;
