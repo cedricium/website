@@ -1,0 +1,44 @@
+/* CSS Custom Variables */
+:root {
+  --bluegray-50: #f8f9fc;
+  --bluegray-200: #d5d9eb;
+  --bluegray-300: #afb5d9;
+  --bluegray-400: #717bbc;
+  --bluegray-500: #4e5ba6;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-accent: 'Newsreader', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bluegray-50);
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+p,
+a {
+  margin: 0;
+  color: var(--bluegray-500);
+  line-height: 1.5;
+}
+
+em {
+  font-family: var(--font-accent);
+}
+
+section > p {
+  margin-bottom: 20px;
+  color: var(--bluegray-500);
+}
