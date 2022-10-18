@@ -1,5 +1,5 @@
 const Colophon = () => (
-  <section>
+  <section className='animated fadeIn delay-4u'>
     <p>
       <strong>Colophon</strong>
     </p>

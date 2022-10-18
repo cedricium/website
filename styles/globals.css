@@ -6,8 +6,9 @@
   --bluegray-400: #717bbc;
   --bluegray-500: #4e5ba6;
 
-  --font-sans: 'Inter', sans-serif;
-  --font-accent: 'Newsreader', serif;
+
+  --animate-duration: 1s;
+  --animate-delay: 0.25s;
 }
 
 * {
@@ -41,4 +42,42 @@ em {
 section > p {
   margin-bottom: 20px;
   color: var(--bluegray-500);
+}
+
+/* Animate.css Animations */
+.animated {
+  animation-duration: var(--animate-duration);
+  animation-fill-mode: both;
+}
+
+.animated.delay-1u {
+  animation-delay: var(--animate-delay);
+}
+
+.animated.delay-2u {
+  animation-delay: calc(var(--animate-delay) * 2);
+}
+
+.animated.delay-3u {
+  animation-delay: calc(var(--animate-delay) * 3);
+}
+
+.animated.delay-4u {
+  animation-delay: calc(var(--animate-delay) * 4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
 }

@@ -1,7 +1,7 @@
 import styles from '../styles/DescriptionList.module.css';
 
 const DescriptionList = ({ title, items }) => (
-  <section>
+  <section className='animated fadeIn delay-3u'>
     <p>
       <strong>{title}</strong>
     </p>
