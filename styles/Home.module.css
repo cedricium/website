@@ -46,3 +46,7 @@
 .footer em {
   color: var(--bluegray-400);
 }
+
+.footer em:hover {
+  cursor: help;
+}
