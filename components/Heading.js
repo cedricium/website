@@ -1,4 +1,4 @@
-import styles from '../styles/Heading.module.css';
+import styles from 'styles/Heading.module.css';
 
 const Heading = () => (
   <h1 className={styles.title}>

@@ -12,6 +12,7 @@
 }
 
 .dl > div dt {
+  line-height: 24px;
   min-width: 96px;
   color: var(--bluegray-300);
 }

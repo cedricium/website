@@ -1,4 +1,4 @@
-import styles from '../styles/DescriptionList.module.css';
+import styles from 'styles/DescriptionList.module.css';
 
 const DescriptionList = ({ title, items }) => (
   <section className='animated fadeIn delay-3u'>
