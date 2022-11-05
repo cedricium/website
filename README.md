@@ -40,3 +40,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
   - hover effects on links
 - [ ] styling: grainy/papery background
 - [ ] SEO
+  - [ ] utilize Vercel [`@vercel/og` library](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation) for OG images
+- [ ] enable Vercel [Analytics](https://vercel.com/docs/concepts/analytics/audiences/quickstart) (powered by Splitbee :eyes:)
