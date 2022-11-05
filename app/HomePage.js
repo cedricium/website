@@ -1,10 +1,11 @@
-import Heading from '../components/Heading';
-import Experience from '../components/Experience';
-import Education from '../components/Education';
-import Elsewhere from '../components/Elsewhere';
-import Colophon from '../components/Colophon';
+import Heading from 'components/Heading';
+import Experience from 'components/Experience';
+import Education from 'components/Education';
+import Elsewhere from 'components/Elsewhere';
+import Colophon from 'components/Colophon';
+import Footer from 'components/Footer';
 
-import styles from '../styles/Home.module.css';
+import styles from 'styles/Home.module.css';
 
 export default function HomePage() {
   return (
@@ -17,9 +18,7 @@ export default function HomePage() {
         <Colophon />
       </main>
 
-      <footer className={styles.footer}>
-        <em title='No reward without effort'>palma non sine pulvere</em>
-      </footer>
+      <Footer />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import DescriptionList from './DescriptionList';
+import DescriptionList from 'components/DescriptionList';
 
 const ExternalLink = ({ href, label }) => (
   <a href={href} target='_blank' rel='noopener noreferrer'>
