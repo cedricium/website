@@ -2,6 +2,18 @@ import DescriptionList from 'components/DescriptionList';
 
 const EXPERIENCE = [
   {
+    key: 'connectrn',
+    dt: '2022—Now',
+    dd: (
+      <>
+        <p>
+          <strong>Full-Stack Engineer, connectRN</strong>
+        </p>
+        <p>Helping build the future of healthcare.</p>
+      </>
+    ),
+  },
+  {
     key: 'hellosaurus',
     dt: '2020—2022',
     dd: (

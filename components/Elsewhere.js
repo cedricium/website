@@ -22,7 +22,7 @@ const SOCIALS = [
     dt: 'LinkedIn',
     dd: (
       <ExternalLink
-        href='https://www.linkedin.com/cedricamaya'
+        href='https://www.linkedin.com/in/cedricamaya'
         label='@cedricamaya'
       />
     ),
