@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { League_Gothic, Source_Serif_4 } from "next/font/google";
+import { league, source } from "@/lib/fonts";
 
 import "./globals.css";
-
-export const league = League_Gothic({ subsets: ["latin"] });
-export const source = Source_Serif_4({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Cedric Amaya — Software Engineer",

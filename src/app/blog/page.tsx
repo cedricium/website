@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { league } from "@/app/layout";
+import { league } from "@/lib/fonts";
 import { getAllPosts } from "@/lib/api";
 import { Post } from "@/interfaces/post";
 

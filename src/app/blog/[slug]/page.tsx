@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { league } from "@/app/layout";
+import { league } from "@/lib/fonts";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHTML from "@/lib/markdownToHTML";
 
