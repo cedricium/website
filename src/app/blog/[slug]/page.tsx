@@ -1,0 +1,68 @@
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { league } from "@/app/layout";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
+import markdownToHTML from "@/lib/markdownToHTML";
+
+function formatDateString(dateStr: string): string {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return date.toLocaleDateString("en-US", options);
+}
+
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function Page({ params }: Params) {
+  const post = getPostBySlug(params.slug);
+  if (!post) {
+    return notFound();
+  }
+
+  const content = await markdownToHTML(post.content);
+
+  return (
+    <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
+      <header className="w-full md:w-1/2">
+        <div className="space-y-2 md:sticky md:top-36">
+          <h2
+            className={`${league.className} max-w-sm text-4xl text-whiteish/80`}
+          >
+            {post.title}
+          </h2>
+
+          <nav className="relative flex flex-row gap-2 font-medium">
+            <Link href="/">About</Link>
+            <Link href="/work">Work</Link>
+            <Link href="/projects">Projects</Link>
+            <Link href="/blog">Blog</Link>
+          </nav>
+        </div>
+      </header>
+
+      <div className="flex flex-col gap-4 w-full md:w-1/2">
+        <p className="text-sm text-whiteish">{formatDateString(post.date)}</p>
+
+        <article
+          className="prose prose-invert max-w-prose"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      </div>
+    </section>
+  );
+}
+
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
