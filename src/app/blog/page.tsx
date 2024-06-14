@@ -30,11 +30,7 @@ export default function Page() {
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
       <header className="w-full md:w-1/2">
         <div className="space-y-2 md:sticky md:top-36">
-          <h2
-            className={`${league.className} max-w-sm text-4xl text-whiteish/80`}
-          >
-            Blog
-          </h2>
+          <h2 className={`${league.className} max-w-sm text-4xl`}>Blog</h2>
 
           <nav className="relative flex flex-row gap-2 font-medium">
             <Link href="/">About</Link>
@@ -49,7 +45,7 @@ export default function Page() {
         {Object.entries(groupedBlogPosts).map(([date, posts]) => (
           <div key={date}>
             <h3 className={`${league.className} text-2xl`}>{date}</h3>
-            <ul className="text-whiteish">
+            <ul>
               {posts.map((post) => (
                 <li key={post.slug}>
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>

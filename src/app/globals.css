@@ -2,15 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 243, 246, 250;
-  --background-rgb: 14, 16, 18;
+body {
+  @apply text-stone-300;
+  @apply bg-stone-900;
+  font-weight: 300;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  font-weight: 300;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-stone-400;
+}
+
+a {
+  @apply text-stone-50;
 }
 
 .grain {

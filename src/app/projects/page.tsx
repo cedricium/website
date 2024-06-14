@@ -6,11 +6,7 @@ export default function Page() {
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
       <header className="w-full md:w-1/2">
         <div className="space-y-2 md:sticky md:top-36">
-          <h2
-            className={`${league.className} max-w-sm text-4xl text-whiteish/80`}
-          >
-            Projects
-          </h2>
+          <h2 className={`${league.className} max-w-sm text-4xl`}>Projects</h2>
 
           <nav className="relative flex flex-row gap-2 font-medium">
             <Link href="/">About</Link>

@@ -6,9 +6,7 @@ export default function Page() {
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
       <header className="w-full md:w-1/2">
         <div className="space-y-2 md:sticky md:top-36">
-          <h2
-            className={`${league.className} max-w-sm text-4xl text-whiteish/80`}
-          >
+          <h2 className={`${league.className} max-w-sm text-4xl`}>
             Work Experience
           </h2>
 
@@ -29,9 +27,7 @@ export default function Page() {
               connectRN ↝
             </a>
           </h3>
-          <p className="font-medium text-whiteish">
-            Software Engineer, Full Stack
-          </p>
+          <p className="font-medium">Software Engineer, Full Stack</p>
           <p>
             Developed a novel CLI static analysis tool written in Go to replay
             backend service usage. Other efforts included a focus on platform
@@ -46,7 +42,7 @@ export default function Page() {
               Hellosaurus ↝
             </a>
           </h3>
-          <p className="font-medium text-whiteish">Full Stack Engineer</p>
+          <p className="font-medium">Full Stack Engineer</p>
           <p>
             Worked on a variety of projects, from the marketing site powered by
             Next.js to the CMS and Creator Studio, a React-powered web app for
@@ -61,9 +57,7 @@ export default function Page() {
               Moogsoft ↝
             </a>
           </h3>
-          <p className="font-medium text-whiteish">
-            Software Engineering Intern
-          </p>
+          <p className="font-medium">Software Engineering Intern</p>
           <p>
             Wrangled JavaScript charting libraries and helped optimize web app
             bundling and build performance for the new cloud-based AIOps
@@ -78,7 +72,7 @@ export default function Page() {
               Menlo Security ↝
             </a>
           </h3>
-          <p className="font-medium text-whiteish">
+          <p className="font-medium">
             Software Development Engineer in Test Co-op
           </p>
           <p>

@@ -32,9 +32,7 @@ export default async function Page({ params }: Params) {
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
       <header className="w-full md:w-1/2">
         <div className="space-y-2 md:sticky md:top-36">
-          <h2
-            className={`${league.className} max-w-sm text-4xl text-whiteish/80`}
-          >
+          <h2 className={`${league.className} max-w-sm text-4xl`}>
             {post.title}
           </h2>
 
@@ -48,10 +46,10 @@ export default async function Page({ params }: Params) {
       </header>
 
       <div className="flex flex-col gap-4 w-full md:w-1/2">
-        <p className="text-sm text-whiteish">{formatDateString(post.date)}</p>
+        <p className="text-sm">{formatDateString(post.date)}</p>
 
         <article
-          className="prose prose-invert max-w-prose"
+          className="prose prose-stone prose-invert max-w-prose"
           dangerouslySetInnerHTML={{ __html: content }}
         />
       </div>
