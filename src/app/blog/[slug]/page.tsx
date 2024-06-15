@@ -1,8 +1,25 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { league } from "@/lib/fonts";
 import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHTML from "@/lib/markdownToHTML";
+
+type Params = {
+  params: {
+    slug: string;
+  };
+};
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const slug = params.slug;
+  const post = getPostBySlug(slug);
+
+  return {
+    title: `${post.title} | Cedric Amaya`,
+    description: post.excerpt,
+  };
+}
 
 function formatDateString(dateStr: string): string {
   const date = new Date(dateStr);
@@ -13,12 +30,6 @@ function formatDateString(dateStr: string): string {
   };
   return date.toLocaleDateString("en-US", options);
 }
-
-type Params = {
-  params: {
-    slug: string;
-  };
-};
 
 export default async function Page({ params }: Params) {
   const post = getPostBySlug(params.slug);

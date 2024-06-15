@@ -1,5 +1,10 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { league } from "@/lib/fonts";
+
+export const metadata: Metadata = {
+  title: "Work Experience | Cedric Amaya",
+};
 
 export default function Page() {
   return (

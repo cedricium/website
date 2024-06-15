@@ -1,7 +1,12 @@
+import { Metadata } from "next";
 import Link from "next/link";
 import { league } from "@/lib/fonts";
 import { getAllPosts } from "@/lib/api";
 import { Post } from "@/interfaces/post";
+
+export const metadata: Metadata = {
+  title: "Blog | Cedric Amaya",
+};
 
 function formatDateToMonthYear(dateStr: string): string {
   const date = new Date(dateStr);
