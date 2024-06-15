@@ -24,7 +24,7 @@ export default function RootLayout({
 
         <main className="max-w-screen-2xl m-auto relative p-8">
           <h1
-            className={`${league.className} text-7xl uppercase md:sticky md:top-16`}
+            className={`${league.className} w-fit text-7xl uppercase md:sticky md:top-16`}
           >
             <Link href="/">Cedric Amaya</Link>
           </h1>

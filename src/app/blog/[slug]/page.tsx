@@ -36,7 +36,7 @@ export default async function Page({ params }: Params) {
             {post.title}
           </h2>
 
-          <nav className="relative flex flex-row gap-2 font-medium">
+          <nav className="relative flex flex-row gap-2 font-semibold">
             <Link href="/">About</Link>
             <Link href="/work">Work</Link>
             <Link href="/projects">Projects</Link>

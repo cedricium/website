@@ -32,7 +32,7 @@ export default function Page() {
         <div className="space-y-2 md:sticky md:top-36">
           <h2 className={`${league.className} max-w-sm text-4xl`}>Blog</h2>
 
-          <nav className="relative flex flex-row gap-2 font-medium">
+          <nav className="relative flex flex-row gap-2 font-semibold">
             <Link href="/">About</Link>
             <Link href="/work">Work</Link>
             <Link href="/projects">Projects</Link>
