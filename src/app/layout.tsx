@@ -22,7 +22,7 @@ export default function RootLayout({
           <div className="texture" />
         </div>
 
-        <main className="max-w-screen-2xl m-auto relative p-8">
+        <main className="max-w-screen-2xl m-auto relative p-4 md:p-8">
           <h1
             className={`${league.className} w-fit text-7xl uppercase md:sticky md:top-16`}
           >
