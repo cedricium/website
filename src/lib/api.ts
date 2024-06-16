@@ -23,15 +23,12 @@ export function getPostBySlug(slug: string): Post {
 
 /**
  * getAllPosts returns all posts from POSTS_DIRECTORY.
- *
- * TODO: filter out those whose `draft` = true when `process.NODE_ENV == production`
+ * Filters out those with `draft = false` in production.
  */
 export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
-  return (
-    slugs
-      .map((slug) => getPostBySlug(slug))
-      // .filter((post) => process.env.NODE_ENV !== "production" && !post.draft)
-      .sort((postA, postB) => (postA.date > postB.date ? -1 : 1))
-  );
+  return slugs
+    .map((slug) => getPostBySlug(slug))
+    .filter((post) => process.env.NODE_ENV !== "production" || !post.draft)
+    .sort((postA, postB) => (postA.date > postB.date ? -1 : 1));
 }
