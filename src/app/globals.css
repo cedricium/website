@@ -4,9 +4,10 @@
 
 html,
 body {
+  overscroll-behavior: none;
   @apply text-stone-300;
   @apply bg-stone-900;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 h1,
@@ -20,6 +21,10 @@ h6 {
 
 a {
   @apply text-stone-50;
+}
+
+p {
+  @apply leading-relaxed;
 }
 
 .grain {
