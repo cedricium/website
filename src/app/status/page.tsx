@@ -54,7 +54,8 @@ type Monitor = {
 
 function MonitorItem({ monitor }: { monitor: Monitor }) {
   const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
-    "en-US"
+    "en-US",
+    { timeZone: "America/Los_Angeles" }
   );
 
   return (
