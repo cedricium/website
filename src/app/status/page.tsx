@@ -52,6 +52,45 @@ type Monitor = {
   };
 };
 
+function MonitorItem({ monitor }: { monitor: Monitor }) {
+  const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
+    "en-US"
+  );
+
+  return (
+    <li key={monitor.id} className="flex items-center gap-4 ">
+      <span
+        title={monitor.status.label}
+        className="relative inline-flex h-2 w-2 hover:cursor-pointer"
+      >
+        <span
+          style={{ backgroundColor: monitor.status.color }}
+          className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75`}
+        />
+        <span
+          style={{ backgroundColor: monitor.status.color }}
+          className={`relative inline-flex rounded-full h-2 w-2`}
+        />
+      </span>
+      <div>
+        <p className="font-medium text-stone-50">
+          {monitor.title}{" "}
+          {monitor.last_update_at && (
+            <time
+              className="font-normal text-xs text-stone-300"
+              dateTime={lastUpdatedAt}
+              title={lastUpdatedAt}
+            >
+              (updated {timeAgo(monitor.last_update_at)})
+            </time>
+          )}
+        </p>
+        <p className="text-sm">{monitor?.description}</p>
+      </div>
+    </li>
+  );
+}
+
 export default async function Page() {
   const { LIFESTATUS_BASE_API } = process.env;
   const response = await fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, {
@@ -81,36 +120,7 @@ export default async function Page() {
       <div className="flex flex-col gap-4 w-full md:w-1/2">
         <ul className="space-y-2">
           {monitors.map((monitor) => (
-            <li key={monitor.id} className="flex items-center gap-4 ">
-              <span
-                title={monitor.status.label}
-                className="relative inline-flex h-2 w-2 hover:cursor-pointer"
-              >
-                <span
-                  style={{ backgroundColor: monitor.status.color }}
-                  className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75`}
-                />
-                <span
-                  style={{ backgroundColor: monitor.status.color }}
-                  className={`relative inline-flex rounded-full h-2 w-2`}
-                />
-              </span>
-              <div>
-                <p className="font-medium text-stone-50">
-                  {monitor.title}{" "}
-                  {monitor.last_update_at && (
-                    <time
-                      title={new Date(monitor.last_update_at).toLocaleString()}
-                      dateTime={new Date(monitor.last_update_at).toISOString()}
-                      className="font-normal text-xs text-stone-300"
-                    >
-                      (updated {timeAgo(monitor.last_update_at)})
-                    </time>
-                  )}
-                </p>
-                <p className="text-sm">{monitor?.description}</p>
-              </div>
-            </li>
+            <MonitorItem key={monitor.id} monitor={monitor} />
           ))}
         </ul>
 
