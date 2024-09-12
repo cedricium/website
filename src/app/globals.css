@@ -19,7 +19,7 @@ h6 {
   @apply text-stone-400;
 }
 
-a {
+a:not(#status) {
   @apply text-stone-50;
 }
 
