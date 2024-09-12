@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { league, source } from "@/lib/fonts";
 
+import StatusIndicator from "./components/status-indicator";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -32,8 +34,9 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="relative p-8 text-xs text-center">
-          cedthe.dev © {new Date().getFullYear()}
+        <footer className="relative space-y-1 p-8 text-xs text-center">
+          <div>cedthe.dev © {new Date().getFullYear()}</div>
+          <StatusIndicator />
         </footer>
       </body>
     </html>
