@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { league } from "@/lib/fonts";
 import { notFound } from "next/navigation";
+import SnapshotGraph from "./snapshot-graph";
 
 function timeAgo(timestamp: number): string {
   const diff = Date.now() - timestamp;
@@ -93,15 +94,28 @@ function MonitorItem({ monitor }: { monitor: Monitor }) {
 }
 
 export default async function Page() {
-  const { LIFESTATUS_BASE_API } = process.env;
-  const response = await fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, {
-    cache: "no-cache",
-  });
-  if (!response.ok) {
+  // const { LIFESTATUS_BASE_API } = process.env;
+  const LIFESTATUS_BASE_API = "http://localhost:3000";
+
+  const responses = await Promise.all([
+    fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, {
+      cache: "no-cache",
+    }),
+    fetch(`${LIFESTATUS_BASE_API}/v1/snapshots`, {
+      cache: "no-cache",
+    }),
+  ]);
+
+  if (!responses.every((r) => r.ok)) {
     return notFound();
   }
 
-  const { monitors, ranges }: MonitorsReq = await response.json();
+  const [{ monitors }, { snapshots }] = await Promise.all([
+    responses[0].json(),
+    responses[1].json(),
+  ]);
+
+  // const { monitors, ranges }: MonitorsReq = await response.json();
 
   return (
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
@@ -119,6 +133,10 @@ export default async function Page() {
       </header>
 
       <div className="flex flex-col gap-4 w-full md:w-1/2">
+        <div>
+          <SnapshotGraph data={snapshots} />
+        </div>
+
         <ul className="space-y-2">
           {monitors.map((monitor) => (
             <MonitorItem key={monitor.id} monitor={monitor} />
