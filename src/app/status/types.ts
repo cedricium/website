@@ -3,10 +3,14 @@ export type MonitorsReq = {
   ranges: StatusRange[];
 };
 
-export type SnapshotChartData = { date: string; avg?: number; fill?: string };
-
 export type SnapshotChartReq = {
   data: SnapshotChartData[];
+};
+
+export type SnapshotChartData = {
+  date: string;
+  avg?: number;
+  fill?: string;
 };
 
 export type StatusRange = {
