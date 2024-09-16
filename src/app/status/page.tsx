@@ -99,9 +99,7 @@ export default async function Page() {
       </header>
 
       <div className="flex flex-col gap-4 w-full md:w-1/2">
-        <div>
-          <SnapshotGraph data={data} />
-        </div>
+        <SnapshotGraph data={data} />
 
         <ul className="space-y-2">
           {monitors.map((monitor) => (
