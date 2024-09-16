@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { league, source } from "@/lib/fonts";
 
-import StatusIndicator from "./components/status-indicator";
+import StatusIndicator from "@/components/status-indicator";
 
 import "./globals.css";
 

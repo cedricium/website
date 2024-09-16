@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { league } from "@/lib/fonts";
 import { notFound } from "next/navigation";
+
+import { league } from "@/lib/fonts";
+import SnapshotGraph from "./snapshot-graph";
+import { Monitor, MonitorsReq, SnapshotChartReq } from "./types";
 
 function timeAgo(timestamp: number): string {
   const diff = Date.now() - timestamp;
@@ -24,33 +27,6 @@ function timeAgo(timestamp: number): string {
     return weeks === 1 ? "1 week ago" : `${weeks} weeks ago`;
   }
 }
-
-type MonitorsReq = {
-  monitors: Monitor[];
-  ranges: StatusRange[];
-};
-
-type StatusRange = {
-  min: number;
-  max: number;
-  label: string;
-  color: string;
-};
-
-type Monitor = {
-  id: string;
-  title: string;
-  description?: string;
-  created_at: number;
-  last_update_at: number;
-  period: number;
-  frequency: number;
-  status: {
-    value: number;
-    label: string;
-    color: string;
-  };
-};
 
 function MonitorItem({ monitor }: { monitor: Monitor }) {
   const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
@@ -94,14 +70,18 @@ function MonitorItem({ monitor }: { monitor: Monitor }) {
 
 export default async function Page() {
   const { LIFESTATUS_BASE_API } = process.env;
-  const response = await fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, {
-    cache: "no-cache",
-  });
-  if (!response.ok) {
+
+  const responses = await Promise.all([
+    fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, { cache: "no-cache" }),
+    fetch(`${LIFESTATUS_BASE_API}/v1/snapshots`, { cache: "no-cache" }),
+  ]);
+
+  if (!responses.every((r) => r.ok)) {
     return notFound();
   }
 
-  const { monitors, ranges }: MonitorsReq = await response.json();
+  const [{ monitors }, { data }]: [MonitorsReq, SnapshotChartReq] =
+    await Promise.all([responses[0].json(), responses[1].json()]);
 
   return (
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
@@ -119,6 +99,8 @@ export default async function Page() {
       </header>
 
       <div className="flex flex-col gap-4 w-full md:w-1/2">
+        <SnapshotGraph data={data} />
+
         <ul className="space-y-2">
           {monitors.map((monitor) => (
             <MonitorItem key={monitor.id} monitor={monitor} />
