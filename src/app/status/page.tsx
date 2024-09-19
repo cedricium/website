@@ -2,31 +2,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { league } from "@/lib/fonts";
+import { timeAgo } from "@/lib/utils";
 import SnapshotGraph from "./snapshot-graph";
+import ActivityFeed from "./activity-feed";
+
 import { Monitor, MonitorsReq, SnapshotChartReq } from "./types";
-
-function timeAgo(timestamp: number): string {
-  const diff = Date.now() - timestamp;
-
-  const minute = 60 * 1000;
-  const hour = 60 * minute;
-  const day = 24 * hour;
-  const week = 7 * day;
-
-  if (diff < hour) {
-    const minutes = Math.floor(diff / minute);
-    return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
-  } else if (diff < day) {
-    const hours = Math.floor(diff / hour);
-    return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
-  } else if (diff < week) {
-    const days = Math.floor(diff / day);
-    return days === 1 ? "1 day ago" : `${days} days ago`;
-  } else {
-    const weeks = Math.floor(diff / week);
-    return weeks === 1 ? "1 week ago" : `${weeks} weeks ago`;
-  }
-}
 
 function MonitorItem({ monitor }: { monitor: Monitor }) {
   const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
@@ -100,14 +80,15 @@ export default async function Page() {
 
       <div className="flex flex-col gap-4 w-full md:w-1/2">
         <SnapshotGraph data={data} />
-
-        <ul className="space-y-2">
+        <ul role="list" className="space-y-2">
           {monitors.map((monitor) => (
             <MonitorItem key={monitor.id} monitor={monitor} />
           ))}
         </ul>
+        <ActivityFeed />
 
         <hr className="my-4" />
+
         <h3 className={`${league.className} text-2xl`}>What is this?</h3>
         <p>
           A public accountability status page for my personal goals/tasks.{" "}
