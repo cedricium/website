@@ -7,6 +7,10 @@ export type SnapshotChartReq = {
   data: SnapshotChartData[];
 };
 
+export type ActivityReq = {
+  activity: Update[];
+};
+
 export type SnapshotChartData = {
   date: string;
   avg?: number;
@@ -33,4 +37,12 @@ export type Monitor = {
     label: string;
     color: string;
   };
+};
+
+export type Update = {
+  id: string;
+  monitor_id: string;
+  timestamp: number;
+  notes?: string;
+  monitor?: string;
 };
