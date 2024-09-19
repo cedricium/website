@@ -1,7 +1,7 @@
 ---
 title: "Public Accountability"
 date: "2024-09-10T19:39:37.154Z"
-draft: true
+draft: false
 excerpt:
   "Doing things is hard. So let's build an API for keeping myself accountable,
   making it publicly accessible."
