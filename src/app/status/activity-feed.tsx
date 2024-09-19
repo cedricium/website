@@ -1,89 +1,7 @@
 import { source } from "@/lib/fonts";
 import { timeAgo } from "@/lib/utils";
 
-const ACTIVITY: Update[] = [
-  {
-    id: "c3ng6cfIui",
-    monitor_id: "YT34x9WTEC",
-    timestamp: 1726692583730,
-    notes: 'applied to "Software Development Engineer (Adobe)"',
-    monitor: "Apply to Jobs",
-  },
-  {
-    id: "Urt1WVBwL9",
-    monitor_id: "YT34x9WTEC",
-    timestamp: 1726691957693,
-    notes: 'applied to "Full Stack Software Engineer (Atlassian)"',
-    monitor: "Apply to Jobs",
-  },
-  {
-    id: "09wuNaA6Tm",
-    monitor_id: "YT34x9WTEC",
-    timestamp: 1726691931029,
-    // notes: 'applied to "Full Stack Engineer (Trunk Tools)"',
-    notes: "",
-    monitor: "Apply to Jobs",
-  },
-  {
-    id: "HcNmag81Vr",
-    monitor_id: "6NiaWOx2gb",
-    timestamp: 1726690994034,
-    notes: 'solved "58. Length of Last Word (Easy)"',
-    monitor: "Study / LeetCode",
-  },
-  {
-    id: "dLGusSPu46",
-    monitor_id: "8ix4nfxZR7",
-    timestamp: 1726640862350,
-    notes:
-      'provocative read in "Increment: APIs" on designing for two types of developers: eager and discerning devs.',
-    monitor: "Reading",
-  },
-  {
-    id: "Urt3anX1L9",
-    monitor_id: "RDoOqSJuer",
-    timestamp: 1726638633356,
-    notes:
-      "fix monitor status calculation bug (b7c12a7); add Makefile to project (2bdfb97)",
-    monitor: "Daily Coding",
-  },
-  {
-    id: "FtJnUewXGa",
-    monitor_id: "6NiaWOx2gb",
-    timestamp: 1726631800489,
-    notes: 'solved "169. Majority Element (Easy)"',
-    monitor: "Study / LeetCode",
-  },
-  {
-    id: "7UFx8IxgdX",
-    monitor_id: "RDoOqSJuer",
-    timestamp: 1726530556811,
-    notes: "completed Snapshots feature",
-    monitor: "Daily Coding",
-  },
-  {
-    id: "HcN75y9xVr",
-    monitor_id: "8ix4nfxZR7",
-    timestamp: 1726489989155,
-    notes: 'Increment "APIs" magazine',
-    monitor: "Reading",
-  },
-  {
-    id: "WfjtJNle0E",
-    monitor_id: "RDoOqSJuer",
-    timestamp: 1726467050871,
-    notes: '"snapshots" API + chart PRs',
-    monitor: "Daily Coding",
-  },
-];
-
-type Update = {
-  id: string;
-  monitor_id: string;
-  timestamp: number;
-  notes?: string;
-  monitor: string;
-};
+import { Update } from "./types";
 
 function FeedItem({ update }: { update: Update }) {
   return (
@@ -122,14 +40,14 @@ function FeedItem({ update }: { update: Update }) {
   );
 }
 
-export default function ActivityFeed() {
+export default function ActivityFeed({ activity }: { activity: Update[] }) {
   return (
     <details>
       <summary>Recent Activity</summary>
 
       <div className="py-6 px-2">
         <ul role="list" className=" pr-2 space-y-6">
-          {ACTIVITY.map((update) => (
+          {activity.map((update) => (
             <FeedItem key={update.id} update={update} />
           ))}
         </ul>

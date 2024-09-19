@@ -6,7 +6,7 @@ import { timeAgo } from "@/lib/utils";
 import SnapshotGraph from "./snapshot-graph";
 import ActivityFeed from "./activity-feed";
 
-import { Monitor, MonitorsReq, SnapshotChartReq } from "./types";
+import { Monitor, MonitorsReq, SnapshotChartReq, ActivityReq } from "./types";
 
 function MonitorItem({ monitor }: { monitor: Monitor }) {
   const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
@@ -54,14 +54,22 @@ export default async function Page() {
   const responses = await Promise.all([
     fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, { cache: "no-cache" }),
     fetch(`${LIFESTATUS_BASE_API}/v1/snapshots`, { cache: "no-cache" }),
+    fetch(`${LIFESTATUS_BASE_API}/v1/updates`, { cache: "no-cache" }),
   ]);
 
   if (!responses.every((r) => r.ok)) {
     return notFound();
   }
 
-  const [{ monitors }, { data }]: [MonitorsReq, SnapshotChartReq] =
-    await Promise.all([responses[0].json(), responses[1].json()]);
+  const [{ monitors }, { data }, { activity }]: [
+    MonitorsReq,
+    SnapshotChartReq,
+    ActivityReq
+  ] = await Promise.all([
+    responses[0].json(),
+    responses[1].json(),
+    responses[2].json(),
+  ]);
 
   return (
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">
@@ -85,7 +93,7 @@ export default async function Page() {
             <MonitorItem key={monitor.id} monitor={monitor} />
           ))}
         </ul>
-        <ActivityFeed />
+        <ActivityFeed activity={activity} />
 
         <hr className="my-4" />
 
