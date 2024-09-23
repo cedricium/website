@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { league, source } from "@/lib/fonts";
 
 import StatusIndicator from "@/components/status-indicator";
@@ -39,6 +40,7 @@ export default function RootLayout({
           <StatusIndicator />
         </footer>
       </body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }
