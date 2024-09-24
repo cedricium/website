@@ -28,7 +28,9 @@ function FeedItem({ update }: { update: Update }) {
         Update recorded for{" "}
         <span className="text-background font-medium">{update.monitor}</span>.
         <br />
-        <span className={`${source.className} italic`}>{update.notes}</span>
+        <span className={`${source.className} italic whitespace-pre-line`}>
+          {update.notes}
+        </span>
       </p>
       <time
         dateTime={new Date(update.timestamp).toISOString()}
