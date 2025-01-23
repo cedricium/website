@@ -6,12 +6,13 @@ import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHTML from "@/lib/markdownToHTML";
 
 type Params = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(props: Params): Promise<Metadata> {
+  const params = await props.params;
   const slug = params.slug;
   const post = getPostBySlug(slug);
 
@@ -31,7 +32,8 @@ function formatDateString(dateStr: string): string {
   return date.toLocaleDateString("en-US", options);
 }
 
-export default async function Page({ params }: Params) {
+export default async function Page(props: Params) {
+  const params = await props.params;
   const post = getPostBySlug(params.slug);
   if (!post) {
     return notFound();

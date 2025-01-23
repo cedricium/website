@@ -1,4 +1,6 @@
-type Progress = {
+import { getMonitorStatus } from "@/lib/dal";
+
+export type Progress = {
   status: {
     value: number;
     label: string;
@@ -14,15 +16,7 @@ type Progress = {
 };
 
 export default async function StatusIndicator() {
-  const { LIFESTATUS_BASE_API } = process.env;
-  const response = await fetch(`${LIFESTATUS_BASE_API}/v1/monitors/status`, {
-    cache: "no-cache",
-  });
-  if (!response.ok) {
-    return null;
-  }
-
-  const progress: Progress = await response.json();
+  const progress: Progress = await getMonitorStatus();
   if (!progress) return null;
 
   return (

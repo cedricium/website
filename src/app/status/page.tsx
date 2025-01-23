@@ -7,6 +7,7 @@ import SnapshotGraph from "./snapshot-graph";
 import ActivityFeed from "./activity-feed";
 
 import { Monitor, MonitorsReq, SnapshotChartReq, ActivityReq } from "./types";
+import { ProgressAPI } from "@/lib/dal";
 
 function MonitorItem({ monitor }: { monitor: Monitor }) {
   const lastUpdatedAt = new Date(monitor.last_update_at).toLocaleString(
@@ -49,15 +50,20 @@ function MonitorItem({ monitor }: { monitor: Monitor }) {
 }
 
 export default async function Page() {
-  const { LIFESTATUS_BASE_API } = process.env;
+  return notFound();
 
-  const responses = await Promise.all([
-    fetch(`${LIFESTATUS_BASE_API}/v1/monitors`, { cache: "no-cache" }),
-    fetch(`${LIFESTATUS_BASE_API}/v1/snapshots`, { cache: "no-cache" }),
-    fetch(`${LIFESTATUS_BASE_API}/v1/updates`, { cache: "no-cache" }),
-  ]);
+  let responses = [];
+  try {
+    responses = await Promise.all([
+      ProgressAPI.monitors(),
+      ProgressAPI.snapshots(),
+      ProgressAPI.updates(),
+    ]);
 
-  if (!responses.every((r) => r.ok)) {
+    if (!responses.every((r) => r !== null)) {
+      return notFound();
+    }
+  } catch (error) {
     return notFound();
   }
 
@@ -65,11 +71,7 @@ export default async function Page() {
     MonitorsReq,
     SnapshotChartReq,
     ActivityReq
-  ] = await Promise.all([
-    responses[0].json(),
-    responses[1].json(),
-    responses[2].json(),
-  ]);
+  ] = responses;
 
   return (
     <section className="flex flex-row gap-8 flex-wrap md:mt-10 md:flex-nowrap">

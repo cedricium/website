@@ -37,7 +37,7 @@ export default function RootLayout({
 
         <footer className="relative space-y-1 p-8 text-xs text-center">
           <div>cedthe.dev © {new Date().getFullYear()}</div>
-          <StatusIndicator />
+          {/* <StatusIndicator /> */}
         </footer>
       </body>
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
