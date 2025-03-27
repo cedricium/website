@@ -1,7 +1,7 @@
 import { getAllPosts } from "@/lib/api";
 import { Feed } from "feed";
 
-function getEnvAwareURL(path?: string): string {
+function getEnvAwareUrl(path?: string): string {
   const env = process.env.NODE_ENV || "development";
   let domain: string;
 
@@ -21,22 +21,24 @@ function getEnvAwareURL(path?: string): string {
 
 export async function GET() {
   const posts = getAllPosts();
+  const siteUrl = getEnvAwareUrl();
   const feed = new Feed({
     title: "Cedric Amaya - cedthedev",
     description: "Personal website and blog for Cedric Amaya.",
-    id: getEnvAwareURL(),
-    link: getEnvAwareURL(),
+    id: siteUrl,
+    link: siteUrl,
     copyright: `Copyright © ${new Date().getFullYear()}, Cedric Amaya`,
-    feed: getEnvAwareURL("/rss.xml"),
-    favicon: getEnvAwareURL("/favicon.ico"),
+    feed: getEnvAwareUrl("/rss.xml"),
+    favicon: getEnvAwareUrl("/favicon.ico"),
   });
 
   posts.forEach((post) => {
     if (post.draft) return;
+    const postUrl = getEnvAwareUrl(`/blog/${post.slug}`);
     feed.addItem({
       title: post.title,
-      id: post.slug,
-      link: getEnvAwareURL(`/blog/${post.slug}`),
+      id: postUrl,
+      link: postUrl,
       date: new Date(post.date),
     });
   });
