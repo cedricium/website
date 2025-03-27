@@ -43,5 +43,9 @@ export async function GET() {
     });
   });
 
-  return new Response(feed.rss2());
+  return new Response(feed.rss2(), {
+    headers: {
+      "Content-Type": "application/rss+xml",
+    },
+  });
 }
