@@ -16,20 +16,23 @@ function getEnvAwareUrl(path?: string): string {
       domain = "http://localhost:3000";
   }
 
-  return path ? `${domain}/${path.replace(/^\//, "")}` : domain;
+  return path ? `${domain}/${path.replace(/^\//, "")}` : `${domain}/`;
 }
 
 export async function GET() {
   const posts = getAllPosts();
   const siteUrl = getEnvAwareUrl();
+
   const feed = new Feed({
-    title: "Cedric Amaya - cedthedev",
+    title: "Cedric Amaya - cedthe.dev",
     description: "Personal website and blog for Cedric Amaya.",
     id: siteUrl,
     link: siteUrl,
-    copyright: `Copyright © ${new Date().getFullYear()}, Cedric Amaya`,
-    feed: getEnvAwareUrl("/rss.xml"),
+    copyright: `Copyright (c) ${new Date().getFullYear()}, Cedric Amaya`,
+    feed: getEnvAwareUrl("/feed.xml"),
     favicon: getEnvAwareUrl("/favicon.ico"),
+    image: getEnvAwareUrl("/favicon.ico"),
+    author: { name: "Cedric Amaya" },
   });
 
   posts.forEach((post) => {
@@ -39,13 +42,15 @@ export async function GET() {
       title: post.title,
       id: postUrl,
       link: postUrl,
+      content: post.excerpt,
       date: new Date(post.date),
+      author: [{ name: "Cedric Amaya" }],
     });
   });
 
-  return new Response(feed.rss2(), {
+  return new Response(feed.atom1(), {
     headers: {
-      "Content-Type": "application/rss+xml",
+      "Content-Type": "application/atom+xml",
     },
   });
 }
