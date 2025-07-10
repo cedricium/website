@@ -5,7 +5,7 @@ const nextConfig = {
       {
         source: "/resume",
         destination:
-          "https://docs.google.com/document/d/e/2PACX-1vQ_306Klob3oFsxgvdO1OP2Xp2eumCjbtMQOyyH5pO8ZSqpHDFsMTgvia4O-kD-K-a9dbIfzpDNvEbj/pub",
+          "https://drive.google.com/file/d/1Dq2FACu5QFqtxRDf65XwBowr-L3_dtyX/view?usp=sharing",
         permanent: true,
       },
     ];
