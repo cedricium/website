@@ -1,6 +1,14 @@
+import { ReactNode } from "react";
+
 import { cn } from "@/lib/utils";
 
-function Preview({ caption, children, className, ...props }) {
+interface PreviewProps {
+  caption?: string;
+  children: ReactNode;
+  className?: string;
+}
+
+function Preview({ caption, children, className, ...props }: PreviewProps) {
   return (
     <figure
       className={cn(
