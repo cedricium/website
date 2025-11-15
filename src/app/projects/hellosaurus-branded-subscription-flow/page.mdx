@@ -1,0 +1,111 @@
+import { faculty, instrument } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
+import {
+  ProjectArticle,
+  ProjectOutcomes,
+  ProjectPageLayout,
+  ProjectSidebar,
+} from "@/components/project-case-study";
+import { Preview } from "@/components/ui/preview";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+export const metadata = {
+  title:
+    "Transforming Checkout at Hellosaurus: 6x More Subscriptions and $50K+ Processed",
+  company: {
+    name: "Hellosaurus",
+    overview:
+      "Hellosaurus is an interactive video platform for kids that turns screen time into hands-on play using multi-touch, camera, microphone, and motion-sensor activities.",
+    industry: "Children's Media / EdTech",
+  },
+  role: "Full Stack Engineer",
+  outcome: (
+    <ProjectOutcomes
+      outcomes={[
+        "6x increase in subscriptions",
+        "$50K+ lifetime transactions processed",
+      ]}
+    />
+  ),
+};
+
+<ProjectPageLayout title={metadata.title}>
+
+  <ProjectSidebar {...metadata} />
+  <ProjectArticle>
+
+## Context
+
+**Goal / Problem**  
+ Company leadership wanted a fully branded checkout experience with greater control over the user journey and payment flow. The existing hosted Stripe Checkout limited UI customization and analytics instrumentation. The objective was to deliver a bespoke checkout system aligned with the brand while maintaining PCI compliance and reliability.
+
+**Role**  
+ As the **sole Full Stack Engineer**, I owned the design, development, and deployment of the new checkout experience. I implemented both frontend and backend components, coordinated feedback with the CEO and other stakeholders, and ensured smooth migration from the previous system over the course of one month.
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, Stripe Elements
+- **Backend:** Node.js (Express) written in TypeScript
+- **Payments:** Stripe API & Webhooks
+- **Database:** PostgreSQL
+- **Infra / DevOps:** AWS
+- **CI/CD & Tooling:** GitHub Actions, Stripe CLI for local webhook testing
+
+---
+
+## Architecture Overview
+
+The React frontend integrated **Stripe Elements** for secure card data collection while maintaining a fully custom UI.  
+ The Node.js backend served API endpoints to create customers, manage subscriptions, and handle webhook events.  
+ Stripe webhooks were used to reconcile payment events (success, failure, cancellation) and synchronize subscription status with the internal database.
+
+---
+
+## Implementation Highlights
+
+- Replaced the legacy hosted **Stripe Checkout session** with a fully custom on-site **Next.js \+ Stripe Elements** flow.
+- Built a **Node.js REST API** to handle customer creation, subscription setup, and payment intents.
+- Implemented **Stripe webhook handling** for payment success/failure and subscription lifecycle events.
+- Added **idempotency** safeguards for webhook and API requests to prevent duplicate charges.
+- Integrated **conversion tracking** and error reporting for post-launch analytics.
+- Delivered the end-to-end feature within **one month**, coordinating directly with stakeholders on design and validation.
+
+---
+
+## Challenges & Decisions
+
+- **Challenge:** Ensuring PCI compliance while handling payment fields via custom UI; resolved by isolating sensitive data in Stripe Elements.
+  - **Decision:** Chose **Stripe Elements** over **Stripe Checkout** to gain full control of the user experience and align with brand guidelines.
+- **Challenge:** Managing payment retries and asynchronous subscription updates via Stripe webhooks.
+  - **Decision:** Implemented robust webhook verification and idempotent database updates to ensure transaction consistency.
+
+---
+
+## Outcome / Impact
+
+- **6x increase** in subscription sign-ups compared to the previous hosted checkout.
+- **\>$50,000** in lifetime transaction volume processed through the new system.
+- Improved brand cohesion and conversion tracking visibility.
+
+---
+
+## Lessons / Next Steps
+
+- Deepened understanding of **Stripe subscription lifecycle**, **webhooks**, and **SCA/3DS flows**.
+- Learned to manage trade-offs between **UX customization** and **compliance complexity**.
+
+</ProjectArticle>
+</ProjectPageLayout>

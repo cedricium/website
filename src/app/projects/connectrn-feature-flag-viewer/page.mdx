@@ -1,0 +1,105 @@
+import { faculty, instrument } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
+import {
+  ProjectArticle,
+  ProjectOutcomes,
+  ProjectPageLayout,
+  ProjectSidebar,
+} from "@/components/project-case-study";
+import { Preview } from "@/components/ui/preview";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+export const metadata = {
+  title:
+    "Optimizing Operations at connectRN: $8K Saved Annually with a Custom Feature Flag Viewer",
+  company: {
+    name: "connectRN",
+    overview:
+      "connectRN is a workforce marketplace and per-diem shift app that matches clinicians with flexible nursing shifts and staffing partners to address care-facility staffing needs.",
+    industry: "HealthTech / Healthcare Staffing",
+  },
+  role: "Project Lead, Full Stack Engineer",
+  outcome: (
+    <ProjectOutcomes
+      outcomes={["$8K annual savings", "Engineering bottleneck eliminated"]}
+    />
+  ),
+};
+
+<ProjectPageLayout title={metadata.title}>
+
+  <ProjectSidebar {...metadata} />
+  <ProjectArticle>
+
+## Context
+
+**Goal / Problem**  
+Access to the third-party feature flag management system (LaunchDarkly) was restricted by licensing costs, creating an engineering bottleneck. Team members often needed to check the status of a specific feature flag in development, staging, or production environments but lacked direct license access. The primary goal was to build an internal, read-only flag viewer that replicated key information, thereby reducing the number of required paid licenses.
+
+**Role**  
+**Project Lead** for the internal tool development, overseeing two junior engineers. My specific contributions included:
+
+- **Scaffolding** the simple **React SPA** using **Vite**.
+- **Collaborating with DevOps** to define and set up the CI/CD pipeline for the static site.
+- **Defining the deliverables** and assigning tasks to the junior engineers based on their strengths.
+- **Supervising** the development of flag fetching, display logic, and styling.
+
+---
+
+## Tech Stack
+
+- **Frontend:** React.js, Vite
+- **Backend:** LaunchDarkly API
+- **Database:** N/A
+- **Infra / DevOps:** AWS S3 (static hosting), GitHub Actions (CI/CD)
+
+---
+
+## Architecture Overview
+
+The tool is a simple, high-performance **React Single-Page Application (SPA)** scaffolded with **Vite**. The frontend directly consumes the **LaunchDarkly API** using a read-only API key to fetch flag data. The application is a static site deployed and hosted via **AWS S3** for low-cost, high-availability serving. Deployment is managed automatically using a **GitHub Actions CI/CD pipeline**, which builds the React app and publishes the resulting static assets to the S3 bucket. This architecture ensured minimal maintenance overhead and high reliability.
+
+---
+
+## Implementation Highlights
+
+- **Scaffolded a modern, performant React SPA** using Vite, establishing a scalable foundation for future internal tooling.
+- **Integrated with the LaunchDarkly API** using a secure, read-only key to fetch real-time flag data across development, staging, and production environments.
+- **Established a standardized CI/CD pipeline** via **GitHub Actions** for publishing internal static applications to **AWS S3**.
+- **Mentored and managed** two junior engineers, delegating feature work (display logic, styling) to maximize team output.
+
+---
+
+## Challenges & Decisions
+
+- **Decision:** Built a custom internal tool instead of purchasing more licenses.
+  - **Rationale:** The business goal was purely to provide _read-only_ visibility into flag status for internal teams, which did not justify the cost of full LaunchDarkly seats. The tool provided 90% of the required functionality for 0% of the incremental license cost, directly fulfilling the cost-saving objective.
+
+---
+
+## Outcome / Impact
+
+- Achieved an **annual licensing fee savings of $8,000** by eliminating the need for 30+ additional LaunchDarkly user seats.
+- **Streamlined engineering workflows** by providing instant, self-service access to feature flag statuses, eliminating communication bottlenecks.
+- Established a reusable **CI/CD pipeline and static site infrastructure** (React \+ Vite \+ AWS S3 \+ GitHub Actions) for future internal tooling.
+
+---
+
+## Lessons / Next Steps
+
+- Gained experience in **leading and delegating work** to junior team members effectively, focusing on scaffolding and infrastructure while supervising feature delivery.
+- Understood the significant financial impact of targeted internal tooling development as a replacement for costly external software licenses.
+
+</ProjectArticle>
+</ProjectPageLayout>

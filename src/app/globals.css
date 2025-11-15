@@ -5,103 +5,13 @@
 html,
 body {
   overscroll-behavior: none;
-  @apply text-stone-300;
-  @apply bg-stone-900;
   font-weight: 400;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply text-stone-400;
-}
-
-a:not(#status) {
-  @apply text-stone-50;
-}
-
-p {
-  @apply leading-relaxed;
-}
-
-.grain {
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  position: fixed;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
-  overflow: hidden;
-}
-
-.grain .texture {
-  width: 300%;
-  height: 300%;
-  max-width: none;
-  background-image: url("/grain.png");
-  background-position: 50%;
-  background-size: 256px;
-  flex: none;
-  position: absolute;
-  top: -150%;
-  bottom: 0%;
-  left: -150%;
-  right: 0%;
-
-  animation: 2s steps(1) infinite noise;
-}
-
-@keyframes noise {
-  0%,
-  100% {
-    background-position: 0 0;
-  }
-
-  10% {
-    background-position: -5% -10%;
-  }
-
-  20% {
-    background-position: -15% 5%;
-  }
-
-  30% {
-    background-position: 7% -25%;
-  }
-
-  40% {
-    background-position: 20% 25%;
-  }
-
-  50% {
-    background-position: -25% 10%;
-  }
-
-  60% {
-    background-position: 15% 5%;
-  }
-
-  70% {
-    background-position: 0% 15%;
-  }
-
-  80% {
-    background-position: 25% 35%;
-  }
-
-  90% {
-    background-position: -10% 10%;
-  }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 36, 50%, 96%; /* beige */
+    /* --background: 0 0% 100%; */
     --foreground: 20 14.3% 4.1%;
     --card: 0 0% 100%;
     --card-foreground: 20 14.3% 4.1%;
@@ -160,6 +70,9 @@ p {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-sm text-foreground text-stone-900;
+  }
+  hr {
+    @apply !border-yellow-800/20;
   }
 }

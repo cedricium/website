@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Script from "next/script";
-import { league, source } from "@/lib/fonts";
 
-import StatusIndicator from "@/components/status-indicator";
+import { hanken } from "@/lib/fonts";
 
 import "./globals.css";
 
+import { Signature } from "@/components/signature";
+import { Separator } from "@/components/ui/separator";
+
 export const metadata: Metadata = {
-  title: "Cedric Amaya — Software Engineer",
+  title: "Cedric Amaya — Full-Stack Product Engineer",
   description:
-    "Cedric Amaya: Developer. Tinkerer. Solopreneur. Specializing in zero-to-one product development.",
+    "Developer and tinkerer specializing in zero-to-one product development.",
 };
 
 export default function RootLayout({
@@ -20,27 +22,74 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={source.className}>
-        <div className="grain">
-          <div className="texture" />
-        </div>
+      <body className={`bg-background ${hanken.className}`}>
+        <header className="w-full max-w-[1492px] mx-auto">
+          <nav className="p-6 md:px-12 space-y-2 flex items-center justify-between">
+            <div>
+              <Link
+                href="/"
+                title="Cedric Amaya"
+                className="block w-fit"
+              >
+                <Signature />
+              </Link>
+            </div>
 
-        <main className="max-w-screen-2xl m-auto relative p-4 pt-8 md:p-8">
-          <h1
-            className={`${league.className} w-fit text-7xl uppercase md:sticky md:top-16`}
-          >
-            <Link href="/">Cedric Amaya</Link>
-          </h1>
+            <ul className="flex gap-2">
+              <li>
+                <Link href="/">Home</Link>
+              </li>
+              {" · "}
+              <li>
+                <Link href="/resume">Resume</Link>
+              </li>
+              {" · "}
+              <li>
+                <Link href="/blog">Blog</Link>
+              </li>
+            </ul>
+          </nav>
+        </header>
 
-          {children}
-        </main>
+        <main>{children}</main>
 
-        <footer className="relative space-y-1 p-8 text-xs text-center">
-          <div>cedthe.dev © {new Date().getFullYear()}</div>
-          {/* <StatusIndicator /> */}
+        <footer className="w-full max-w-[1492px] mx-auto mt-16 py-4 border-t border-border text-xs text-muted-foreground">
+          <div className="px-4 md:px-12 flex items-center justify-between">
+            Copyright &copy; {new Date().getFullYear()} Cedric Amaya
+            <ul className="flex gap-2 h-4">
+              <li>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://www.linkedin.com/in/cedricamaya"
+                >
+                  LinkedIn
+                </Link>
+              </li>
+              <Separator orientation="vertical" />
+              <li>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://github.com/cedricium"
+                >
+                  GitHub
+                </Link>
+              </li>
+              <Separator orientation="vertical" />
+              <li>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://x.com/cedricamaya"
+                >
+                  Twitter
+                </Link>
+              </li>
+            </ul>
+          </div>
         </footer>
       </body>
-      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 }

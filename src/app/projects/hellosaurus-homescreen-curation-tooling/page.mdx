@@ -1,0 +1,111 @@
+import { faculty, instrument } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
+import {
+  ProjectArticle,
+  ProjectOutcomes,
+  ProjectPageLayout,
+  ProjectSidebar,
+} from "@/components/project-case-study";
+import { Preview } from "@/components/ui/preview";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+export const metadata = {
+  title:
+    "Rebuilding App Curation at Hellosaurus: 60x Faster Updates, Saving 8+ Hours Each Release",
+  company: {
+    name: "Hellosaurus",
+    overview:
+      "Hellosaurus is an interactive video platform for kids that turns screen time into hands-on play using multi-touch, camera, microphone, and motion-sensor activities.",
+    industry: "Children's Media / EdTech",
+  },
+  role: "Full Stack Engineer, SDUI System Architect",
+  outcome: (
+    <ProjectOutcomes
+      outcomes={["60x faster updates", "~8 hours saved per app update"]}
+    />
+  ),
+};
+
+<ProjectPageLayout title={metadata.title}>
+
+  <ProjectSidebar {...metadata} />
+  <ProjectArticle>
+
+## Context
+
+**Goal / Problem**  
+The existing process for updating the mobile app's homescreen layout (content such as episodes and collections) was entirely dependent on a new mobile application build and release. This created a significant bottleneck, requiring the production team to wait for a mobile developer and then endure the lengthy Apple App Store review process, consuming an estimated **8+ hours of manual work and delay per update**.
+
+**Role**  
+Spearheaded the initiative to implement the Server-Driven UI pattern. My contributions involved **end-to-end feature development** for the internal tooling and API, including:
+
+- Designing the **API contract** between the server and the mobile clients/CMS.
+- Implementing **database schema changes**.
+- Developing the **backend API endpoints** (the Homescreen API).
+- Building the **CMS/internal admin tool frontend** for configuration.
+
+<Preview caption="Admin Homescreen">
+  ![admin homescreen](/hellosaurus-admin-homescreen.png)
+</Preview>
+
+## Tech Stack
+
+- **Frontend (Internal Tool):** React.js (within the existing Hellosaurus CMS)
+- **Backend:** Node.js, Express.js, TypeScript (Hellosaurus API)
+- **Caching:** Redis
+- **Database:** PostgreSQL
+- **Infra / DevOps:** AWS EC2
+
+---
+
+## Architecture Overview
+
+The system followed a **Server-Driven UI (SDUI)** pattern. A new page within the existing **React.js CMS** allows the production team (with admin access) to configure the mobile app's homescreen layout using pre-defined content modules. This configuration is persisted in **PostgreSQL**. The **Node.js/Express.js API** hosts the dedicated "Homescreen API" endpoint. When the mobile application loads, it requests this endpoint, which returns a dynamic JSON payload defining the structure and content of the homescreen. The mobile client reads this payload and renders the UI instantly, entirely decoupling homescreen updates from the mobile release cycle.
+
+---
+
+## Implementation Highlights
+
+- **Implemented the Server-Driven UI (SDUI) pattern** after research and evaluation of the concept (inspired by DoorDash engineering insights[1][2]).
+- **Designed and implemented the full-stack system** from the React CMS frontend to the PostgreSQL schema and Node.js/Express.js API endpoints.
+- **Defined a robust, version-agnostic API contract** to reliably communicate UI structure and content between the server and mobile clients.
+- Built a **user-friendly configuration page** within the existing CMS, enabling the production team to configure the homescreen layout using pre-defined modules **in minutes**.
+
+References:
+
+1. [Using Display Modules to Enable Rapid Experimentation on DoorDash's Homepage](https://careersatdoordash.com/blog/using-display-modules-to-enable-rapid-experimentation/)
+2. [Improving Development Velocity with Generic, Server-Driven UI Components](https://careersatdoordash.com/blog/improving-development-velocity-with-generic-server-driven-ui-components/)
+
+---
+
+## Challenges & Decisions
+
+- **Decision:** Implemented a **Server-Driven UI pattern**.
+  - **Rationale:** This pattern was chosen to completely decouple the content and layout presentation layer from the mobile app's lengthy release cycle (Apple App Store review), directly solving the core bottleneck problem and enabling instant updates.
+
+---
+
+## Outcome / Impact
+
+- **Eliminated approximately 6 hours of manual work and delay per homescreen update**, freeing up both development and production team capacity.
+- Enabled **instant, version bump-free updates** to the mobile app's primary screen, allowing the production team to react immediately to content needs.
+- **Reduced time-to-market for homescreen changes** from hours (or a day) to **seconds**.
+
+## Lessons / Next Steps
+
+- Gained a deeper, practical understanding of designing systems where the backend dictates the frontend's structure.
+- Reinforced the value of **decoupling release cycles** between content and code, significantly improving team velocity and content agility.
+
+</ProjectArticle>
+</ProjectPageLayout>

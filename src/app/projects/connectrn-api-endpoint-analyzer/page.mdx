@@ -1,0 +1,112 @@
+import { faculty, instrument } from "@/lib/fonts";
+import { cn } from "@/lib/utils";
+
+import {
+  ProjectArticle,
+  ProjectOutcomes,
+  ProjectPageLayout,
+  ProjectSidebar,
+} from "@/components/project-case-study";
+import { Preview } from "@/components/ui/preview";
+import { Separator } from "@/components/ui/separator";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
+export const metadata = {
+  title:
+    "Accelerating API Insights at connectRN: 28x Faster Verification and 20+ Endpoints Retired",
+  company: {
+    name: "connectRN",
+    overview:
+      "connectRN is a workforce marketplace and per-diem shift app that matches clinicians with flexible nursing shifts and staffing partners to address care-facility staffing needs.",
+    industry: "HealthTech / Healthcare Staffing",
+  },
+  role: "Tool Developer, Automation Architect",
+  outcome: (
+    <ProjectOutcomes
+      outcomes={["28x faster verification", "20+ endpoints removed"]}
+    />
+  ),
+};
+
+<ProjectPageLayout title={metadata.title}>
+
+  <ProjectSidebar {...metadata} />
+  <ProjectArticle>
+
+## Context
+
+**Goal / Problem**  
+Due to the company's age and history of pivots, the backend services contained a significant amount of technical debt in the form of obsolete, unused API endpoints. The manual process to verify usage involved multiple engineers running individual queries in **AWS CloudWatch** against **AWS ELB access logs** for every potential endpoint. This manual verification process was slow and cumbersome, taking a multi-engineer team approximately **two weeks per verification cycle** to confirm which endpoints could be safely retired.
+
+**Role**  
+Primary developer and architect for the custom automation tool. My contributions included:
+
+- Conceiving the solution to automate the usage verification process using a dedicated CLI.
+- Designing the logic to **ingest the router table** from our Go services.
+- Developing the tool in **Go** using the **AWS SDK for Go** to interface with S3.
+- Implementing the parsing and querying logic to process **AWS ELB access logs** retrieved from S3 and count endpoint usage.
+
+---
+
+## Tech Stack
+
+- **Frontend:** N/A (Command Line Interface - CLI)
+- **Backend:** Go (for CLI tool)
+- **Database:** N/A (data source is AWS ELB access logs stored in S3)
+- **Infra / DevOps:** AWS S3, AWS ELB, AWS SDK for Go
+
+---
+
+## Architecture Overview
+
+The tool is a **Go-based Command Line Interface (CLI)** application.
+
+1. **Input:** The CLI accepts parameters defining the target Go service's router table and the time period for analysis.
+2. **Extraction:** It automatically reads and parses the defined router table to get a list of all known API endpoints.
+3. **Data Retrieval:** Using the **AWS SDK for Go**, the tool programmatically accesses and retrieves the raw **AWS ELB access logs** stored in **AWS S3** for the specified time window.
+4. **Processing:** The Go tool processes the logs, tallying the usage count for each known endpoint.
+5. **Output:** It generates a report displaying a usage count for all endpoints or simply listing those endpoints confirmed to have zero usage (obsolete).
+
+---
+
+## Implementation Highlights
+
+- Developed a performant, custom CLI tool in **Go** to replace a complex manual workflow.
+- Utilized the **AWS SDK for Go** to programmatically access and efficiently parse raw, potentially large, ELB log files stored in S3.
+- Created a core routine that efficiently **maps ELB log request paths** to the actual **Go service router table** definitions to ensure accurate usage attribution.
+- **Reduced the runtime of the usage verification process** from a two-week multi-engineer effort to a **30-minute automated job**.
+
+---
+
+## Challenges & Decisions
+
+- **Decision:** Built a custom Go CLI to parse raw S3 logs instead of relying on specialized CloudWatch querying.
+  - **Rationale:** While CloudWatch was the initial manual tool, its query language required per-endpoint effort. Building a custom tool in **Go** allowed for programmatic ingestion of the entire router map and processing a batch of logs simultaneously, providing massive efficiency gains that no manual query system could match.
+
+---
+
+## Outcome / Impact
+
+- **Eliminated weeks of manual engineering effort** per verification cycle, redirecting valuable engineer time to new feature development.
+- **Reduced the total time-to-verification** for a six-month usage period from a two-week sprint to approximately **30 minutes**.
+- **Enabled the safe removal of 20+ obsolete API endpoints**, significantly reducing technical debt and simplifying future maintenance and security reviews.
+
+---
+
+## Lessons / Next Steps
+
+- Gained deep practical experience with the **AWS SDK for Go** and large-scale log processing/parsing.
+- Learned that investment in simple, targeted internal tooling can yield exponential returns in efficiency and technical debt reduction.
+- Next step would be to **integrate this tool into the CI/CD pipeline** to automatically flag zero-usage routes prior to every major release.
+
+</ProjectArticle>
+</ProjectPageLayout>
