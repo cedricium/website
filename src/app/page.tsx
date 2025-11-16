@@ -250,7 +250,6 @@ export default function Page() {
       </section>
 
       <section className="flex flex-col lg:flex-row lg:items-start gap-12 w-full max-w-[1492px] mx-auto p-6 md:p-12">
-        {/* <div className=""> */}
         <div className="flex-1 shrink-0 flex flex-col gap-6">
           <h2 className="text-xs font-semibold uppercase">Experience</h2>
           <div className="flex flex-col gap-3 md:gap-1">
@@ -299,7 +298,7 @@ export default function Page() {
                       <CardFooter className="flex flex-col items-start">
                         <span className="font-semibold">{rec.author}</span>
                         <span className="text-muted-foreground">
-                          {rec.role} ({rec.company})
+                          {rec.role}, {rec.company}
                         </span>
                       </CardFooter>
                     </Card>
@@ -313,7 +312,6 @@ export default function Page() {
             </div>
           </Carousel>
         </div>
-        {/* </div> */}
       </section>
 
       <section className="bg-stone-800">
@@ -399,7 +397,7 @@ export default function Page() {
       <section>
         <div className="flex flex-col gap-6 p-6 md:p-12 w-full max-w-[1492px] mx-auto">
           <div className="flex items-center gap-2">
-            <h2 className="text-xs font-semibold uppercase">Recent Posts</h2>
+            <h2 className="text-xs font-semibold uppercase">Writing</h2>
             <Badge
               variant="outline"
               className="bg-stone-600/5"

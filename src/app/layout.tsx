@@ -55,7 +55,7 @@ export default function RootLayout({
 
         <footer className="w-full max-w-[1492px] mx-auto mt-16 py-4 border-t border-border text-xs text-muted-foreground">
           <div className="px-4 md:px-12 flex items-center justify-between">
-            Copyright &copy; {new Date().getFullYear()} Cedric Amaya
+            &copy; {new Date().getFullYear()} Cedric Amaya
             <ul className="flex gap-2 h-4">
               <li>
                 <Link
