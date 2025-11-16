@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       {
         source: "/resume",
         destination:
-          "https://drive.google.com/file/d/1Dq2FACu5QFqtxRDf65XwBowr-L3_dtyX/view?usp=sharing",
+          "https://drive.google.com/file/d/1mwjOQN4vHlt4cBWy48UbrlRdljHCXA7B/view?usp=sharing",
         permanent: true,
       },
     ];
