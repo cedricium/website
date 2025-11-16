@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 import { hanken } from "@/lib/fonts";
 
@@ -90,6 +90,8 @@ export default function RootLayout({
           </div>
         </footer>
       </body>
+
+      <Analytics />
     </html>
   );
 }
