@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { MoveRightIcon } from "lucide-react";
 
+import { getAllPosts } from "@/lib/api";
 import { cooper } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 
 import { InteractiveComputer } from "@/components/interactive-computer";
 import { QuotationMark } from "@/components/quotation-mark";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import {
@@ -190,35 +190,8 @@ const SKILLS = [
   "Confluence",
 ];
 
-const POSTS = [
-  {
-    slug: "public-accountability",
-    title: "Public Accountability",
-    publishedAt: new Date(2024, 8, 12),
-  },
-  {
-    slug: "guess-whos-back",
-    title: "Guess Who's Back",
-    publishedAt: new Date(2024, 5, 10),
-  },
-  {
-    slug: "coffee",
-    title: "Coffee",
-    publishedAt: new Date(2021, 4, 1),
-  },
-  {
-    slug: "towards-monetization",
-    title: "Towards Monetization",
-    publishedAt: new Date(2021, 1, 1),
-  },
-  {
-    slug: "react-hooks-useimperativehandle",
-    title: "React Hooks: `useImperativeHandle`",
-    publishedAt: new Date(2020, 9, 1),
-  },
-];
-
 export default function Page() {
+  const recentPosts = getAllPosts().slice(0, 5);
   return (
     <div className="flex flex-col">
       <section>
@@ -268,6 +241,7 @@ export default function Page() {
                       href={work.website}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="hover:text-yellow-800 transition-colors"
                     >
                       {work.company}
                     </a>
@@ -398,32 +372,38 @@ export default function Page() {
         <div className="flex flex-col gap-6 p-6 md:p-12 w-full max-w-[1492px] mx-auto">
           <div className="flex items-center gap-2">
             <h2 className="text-xs font-semibold uppercase">Writing</h2>
-            <Badge
-              variant="outline"
-              className="bg-stone-600/5"
-            >
-              Coming Soon
-            </Badge>
           </div>
           <div className="flex flex-col gap-3 md:gap-1">
-            {POSTS.map((post) => (
+            {recentPosts.map((post) => (
               <div
                 key={post.slug}
                 className="flex gap-4"
               >
                 <h4 className="text-muted-foreground w-24 min-w-24">
-                  {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                  {new Date(post.date).toLocaleDateString("en-US", {
                     month: "short",
                     day: "2-digit",
                     year: "numeric",
                   })}
                 </h4>
                 <div className="flex flex-col md:flex-row gap-0.5">
-                  <p className="cursor-not-allowed opacity-50">{post.title}</p>
+                  <Link
+                    href={`/blog/${post.slug}`}
+                    className="hover:text-yellow-800 transition-colors"
+                  >
+                    {post.title}
+                  </Link>
                 </div>
               </div>
             ))}
           </div>
+          <Link
+            href="/blog"
+            className="flex items-center gap-1 text-amber-600 hover:underline w-fit"
+          >
+            <span>View all posts</span>
+            <MoveRightIcon className="size-4" />
+          </Link>
         </div>
       </section>
     </div>
