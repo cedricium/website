@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
   description:
     "Developer and tinkerer specializing in zero-to-one product development.",
 };
+
+const LINKS = [
+  { href: "/", title: "Home" },
+  { href: "/resume", title: "Resume" },
+  { href: "/blog", title: "Blog" },
+];
 
 export default function RootLayout({
   children,
@@ -35,18 +42,15 @@ export default function RootLayout({
               </Link>
             </div>
 
-            <ul className="flex gap-2">
-              <li>
-                <Link href="/">Home</Link>
-              </li>
-              {" · "}
-              <li>
-                <Link href="/resume">Resume</Link>
-              </li>
-              {" · "}
-              <li>
-                <Link href="/blog">Blog</Link>
-              </li>
+            <ul className="flex gap-2 items-center">
+              {LINKS.map((link, index) => (
+                <Fragment key={link.href}>
+                  <li className="hover:text-yellow-800 transition-colors">
+                    <Link href={link.href}>{link.title}</Link>
+                  </li>
+                  {index < LINKS.length - 1 && <li aria-hidden="true"> · </li>}
+                </Fragment>
+              ))}
             </ul>
           </nav>
         </header>
