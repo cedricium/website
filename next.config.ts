@@ -3,16 +3,6 @@ import createMDX from "@next/mdx";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "ts", "tsx", "mdx"],
-  async redirects() {
-    return [
-      {
-        source: "/resume",
-        destination:
-          "https://drive.google.com/file/d/1mwjOQN4vHlt4cBWy48UbrlRdljHCXA7B/view?usp=sharing",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 const withMDX = createMDX({
