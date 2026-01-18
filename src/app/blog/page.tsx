@@ -14,19 +14,18 @@ export const metadata: Metadata = {
 export default function BlogIndex() {
   const posts = getAllPosts();
 
-  // Group posts by month and year
+  // Group posts by year
   const groupedPosts = posts.reduce(
     (groups, post) => {
       const date = new Date(post.date);
-      const monthYear = date.toLocaleDateString("en-US", {
+      const year = date.toLocaleDateString("en-US", {
         year: "numeric",
-        month: "long",
       });
 
-      if (!groups[monthYear]) {
-        groups[monthYear] = [];
+      if (!groups[year]) {
+        groups[year] = [];
       }
-      groups[monthYear].push(post);
+      groups[year].push(post);
       return groups;
     },
     {} as Record<string, typeof posts>
@@ -44,51 +43,51 @@ export default function BlogIndex() {
       </h1>
 
       <div className="max-w-4xl">
-        {Object.entries(groupedPosts).map(
-          ([monthYear, postsInMonth], groupIndex) => (
-            <div key={monthYear}>
+        {Object.entries(groupedPosts)
+          .sort(([yearA], [yearB]) => Number(yearB) - Number(yearA))
+          .map(([year, postsInYear], groupIndex) => (
+            <div key={year}>
               {groupIndex > 0 && <hr className="border-yellow-800/20 my-8" />}
-              <h2 className="text-sm uppercase text-stone-600 mb-4 font-semibold tracking-wide">
-                {monthYear}
-              </h2>
-              <div className="space-y-4">
-                {postsInMonth.map((post) => (
-                  <article
-                    key={post.slug}
-                    className={post.draft ? "opacity-60" : ""}
-                  >
-                    <Link
-                      href={`/blog/${post.slug}`}
-                      className="group block"
+              <div className="text-sm uppercase text-stone-600 mb-4 font-semibold tracking-wide">
+                {year}
+              </div>
+              <div className="space-y-1">
+                {postsInYear.map((post) => {
+                  const date = new Date(post.date);
+                  const month = date.toLocaleDateString("en-US", {
+                    month: "short",
+                  });
+                  const day = date.getDate().toString().padStart(2, "0");
+
+                  return (
+                    <article
+                      key={post.slug}
+                      className={post.draft ? "opacity-60" : ""}
                     >
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-lg font-semibold group-hover:text-yellow-800 transition-colors">
-                          {post.title}
-                        </h3>
-                        {post.draft && (
-                          <span className="text-xs font-semibold uppercase px-2 py-0.5 bg-yellow-800/20 text-yellow-900 rounded">
-                            Draft
-                          </span>
-                        )}
-                      </div>
-                      <time className="text-xs text-stone-600 mb-2 block">
-                        {new Date(post.date).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                        })}
-                      </time>
-                      {post.excerpt && (
-                        <p className="text-sm text-stone-700 leading-relaxed">
-                          {post.excerpt}
-                        </p>
-                      )}
-                    </Link>
-                  </article>
-                ))}
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="group flex gap-4 items-baseline"
+                      >
+                        <time className="text-xs text-stone-600 uppercase w-12 shrink-0">
+                          {month} {day}
+                        </time>
+                        <div className="flex items-center gap-2 flex-1">
+                          <h2 className="text-md text-stone-700 font-semibold group-hover:text-yellow-800 transition-colors">
+                            {post.title}
+                          </h2>
+                          {post.draft && (
+                            <span className="text-xs font-semibold uppercase px-2 py-0.5 bg-yellow-800/20 text-yellow-900 rounded">
+                              Draft
+                            </span>
+                          )}
+                        </div>
+                      </Link>
+                    </article>
+                  );
+                })}
               </div>
             </div>
-          )
-        )}
+          ))}
       </div>
     </section>
   );

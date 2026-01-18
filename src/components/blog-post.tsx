@@ -20,16 +20,18 @@ interface BlogPageLayoutProps {
 function BlogPageLayout({ title, children }: BlogPageLayoutProps) {
   return (
     <>
-      <h1
-        className={cn(
-          "max-w-4xl text-3xl md:text-4xl text-balance",
-          cooper.className
-        )}
-      >
-        {title}
-      </h1>
+      <div className="max-w-7xl bg-stone-800 border border-[rgba(226,213,197,0.2)] rounded-t-xl p-8 md:p-12 bg-[length:8px_8px] bg-[radial-gradient(#36342E_1px,_transparent_1px)]">
+        <h1
+          className={cn(
+            "max-w-4xl text-3xl md:text-4xl text-balance text-stone-100",
+            cooper.className
+          )}
+        >
+          {title}
+        </h1>
+      </div>
 
-      <div className="mt-10 border border-yellow-800/20 flex flex-col md:flex-row rounded-xl max-w-7xl">
+      <div className="border border-yellow-800/20 flex flex-col md:flex-row rounded-b-xl max-w-7xl">
         {children}
       </div>
     </>
@@ -45,11 +47,13 @@ function BlogSidebar({ date, excerpt }: BlogSidebarProps) {
   return (
     <aside className="md:sticky md:top-0 h-full prose prose-stone prose-sm p-8 md:p-12 max-w-full md:w-1/3 border-yellow-800/20 border-b md:border-b-0 overflow-x-hidden">
       <h2 className="text-xs uppercase">Published</h2>
-      <p>{new Date(date).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric"
-      })}</p>
+      <p>
+        {new Date(date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </p>
 
       {excerpt && (
         <>
