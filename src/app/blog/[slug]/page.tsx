@@ -1,8 +1,14 @@
 import { Metadata } from "next";
 
-import { getPostBySlug, getAllPosts } from "@/lib/api";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
 import markdownToHTML from "@/lib/markdownToHTML";
-import { BlogPageLayout, BlogSidebar, BlogArticle } from "@/components/blog-post";
+
+import {
+  BlogArticle,
+  BlogPageLayout,
+  BlogSidebar,
+} from "@/components/blog-post";
+import { CodeBlockMetadata } from "@/components/code-block-metadata";
 
 interface PageProps {
   params: Promise<{
@@ -17,7 +23,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
@@ -35,9 +43,13 @@ export default async function BlogPost({ params }: PageProps) {
   return (
     <section className="w-full max-w-[1492px] mx-auto p-6 md:p-12">
       <BlogPageLayout title={post.title}>
-        <BlogSidebar date={post.date} excerpt={post.excerpt} />
+        <BlogSidebar
+          date={post.date}
+          excerpt={post.excerpt}
+        />
         <BlogArticle>
           <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
+          <CodeBlockMetadata />
         </BlogArticle>
       </BlogPageLayout>
     </section>

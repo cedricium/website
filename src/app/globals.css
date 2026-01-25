@@ -75,4 +75,24 @@ body {
   hr {
     @apply !border-yellow-800/20;
   }
+
+  /* Code block container */
+  figure[data-rehype-pretty-code-figure] {
+    @apply rounded-2xl border border-gray-950/10 bg-gray-100 p-1;
+  }
+
+  /* Code block pre element */
+  figure[data-rehype-pretty-code-figure] pre {
+    @apply overflow-x-auto rounded-xl p-4 text-xs;
+  }
+
+  /* Code block highlighted lines */
+  figure[data-rehype-pretty-code-figure] span[data-highlighted-line] {
+    @apply bg-amber-100/50;
+  }
+
+  /* Code element */
+  figure[data-rehype-pretty-code-figure] code {
+    @apply grid font-mono text-xs;
+  }
 }

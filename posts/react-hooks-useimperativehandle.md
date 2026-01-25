@@ -30,8 +30,8 @@ done via form-in-modal but rather in a regular page.
 Here's a simplified version of the ChannelForm, which is used to create and
 update creator channels.
 
-```js
-/* ChannelForm.jsx—updating logic removed for simplicity */
+```js title="ChannelForm.jsx"
+/* updating logic removed for simplicity */
 import React, { useState } from 'react'
 import { create } from 'components/forms/utils'
 
@@ -137,8 +137,7 @@ code working as intended.
 1. Wrap our child component (in this case, the Form component) in `forwardRef`
    [per the React docs](https://reactjs.org/docs/hooks-reference.html#useimperativehandle).
 
-```js
-/* ChannelForm.jsx */
+```js title="ChannelForm.jsx"
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
 /**
@@ -158,8 +157,7 @@ const ChannelForm = forwardRef((props, ref) => {
    component to have access to. In our form-in-modal scenario, we need the
    parent component (Modal) to have access to the Form's `submit` method.
 
-```js
-/* ChannelForm.jsx */
+```js title="ChannelForm.jsx"
 import React, { useState, forwardRef, useImperativeHandle } from 'react'
 
 /**
@@ -180,8 +178,7 @@ const ChannelForm = forwardRef((props, ref) => {
 3. In the parent component, create and pass a ref to the Form child. Accessing
    the child's exposed data is as easy as calling `ref.current.<property-name>`.
 
-```js
-/* Modal.jsx */
+```js title="Modal.jsx"
 import React, { useRef } from 'react'
 import ReactModal from 'react-modal'
 

@@ -17,7 +17,7 @@ in mind and locate the footer of the site. There you will most likely see multip
 links, probably some about the product, the company, the legal things, etc. I
 would also bet there is a statement that looks something along the lines of:
 
-```
+```text
 © <year> <company_name>
 ```
 

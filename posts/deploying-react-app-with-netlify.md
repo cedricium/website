@@ -113,7 +113,7 @@ settings".
     example, given the repo structure below, our base directory would be `nested`.
     If your React app is further nested, you can use `as/many/nests/as/possible`.
 
-```
+```text
 netlify-cd-example/
     .gitignore
     README.md

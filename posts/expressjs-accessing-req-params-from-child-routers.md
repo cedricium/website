@@ -25,8 +25,7 @@ to separate and organize the various routes needing implementation later on.
 My first order of business was to create a `posts` router to handle HTTP requests
 on the `/api/posts` route:
 
-```js
-/* routes/posts/index.js */
+```js title="routes/posts/index.js"
 const postsRouter = require('express').Router()
 
 postsRouter.get('/', async (req, res) => { ... })
@@ -34,23 +33,20 @@ postsRouter.get('/', async (req, res) => { ... })
 ...
 
 module.exports = postsRouter
+```
 
-
-/* server.js */
+```js title="server.js"
 const express = require('express')
 const server = express()
 const postsRouter = require('./routes/posts')
 
 server.use('/api/posts', postsRouter)
-
-...
 ```
 
 Though not required, I thought it best to also separate the comments from the
 posts, so I defined a second router for the `comments`:
 
-```js
-/* routes/comments/index.js */
+```js title="routes/comments/index.js"
 const commentsRouter = require('express').Router()
 
 module.exports = commentsRouter
@@ -74,8 +70,7 @@ the `/api/posts/:id/comments` route, thus relying on a specific post `id`.
 The issue I ran into was when I attempted to read the `req.params.id` from the
 nested/child comments router, I was met with `undefined`:
 
-```js
-/* routes/comments/index.js */
+```js title="routes/comments/index.js"
 
 commentsRouter.get('/', async (req, res) => {
   const postId = req.params.id  // ==> would return `undefined`
@@ -88,7 +83,7 @@ commentsRouter.get('/', async (req, res) => {
 After a little debugging and googling, I discovered that by default Express
 does not pass the `req.params` to child routers. Because the line:
 
-```js
+```js title="routes/posts/index.js"
 postsRouter.use('/:id/comments', commentsRouter)
 ```
 
@@ -120,8 +115,7 @@ in `commentsRouter` via `req.params`. That was it, just the fix I needed!
 
 One small addition to the code and my original setup now works:
 
-```js
-/* routes/comments/index.js */
+```js title="routes/comments/index.js" {1}
 const commentsRouter = require('express').Router({ mergeParams: true })
            // note the addition of `mergeParams` ^^^^^^^^^^^^^^^^^^^^^
 ...

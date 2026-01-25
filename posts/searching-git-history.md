@@ -9,7 +9,7 @@ draft: false
 When you need to see when a specific piece of code was introduced or deleted in your
 codebase, use the following command:
 
-```bash
+```shell
 $ git log -S<string> [<options> [-- <path>…]]
 ```
 
@@ -48,7 +48,7 @@ Given the dilemma outlined above, what I did was use the `git log` command along
 the event passed to the `-S` flag (I also added the path to the file where the
 event should have been):
 
-```bash
+```shell
 $ git log -S "reports-get-manifest-error" -- src/controllers/policy-evaluation.js
 ```
 
