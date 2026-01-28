@@ -2,6 +2,7 @@
 title: "My Process of Building Side Projects"
 date: "2018-12-18T23:30:00.000Z"
 draft: false
+excerpt: "A step-by-step breakdown of turning ideas into shipped products—and the hard lessons about isolation, validation, and knowing when good enough is good enough."
 ---
 
 For those who don't know, I'm a Computer Science major and I enjoy programming
