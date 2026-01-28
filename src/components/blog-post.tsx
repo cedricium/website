@@ -45,7 +45,7 @@ interface BlogSidebarProps {
 
 function BlogSidebar({ date, excerpt }: BlogSidebarProps) {
   return (
-    <aside className="md:sticky md:top-0 h-full prose prose-stone prose-sm p-8 md:p-12 max-w-full md:w-1/3 border-yellow-800/20 border-b md:border-b-0 overflow-x-hidden">
+    <aside className="md:sticky md:top-0 shrink-0 h-full prose prose-stone prose-sm p-8 md:p-12 max-w-full md:w-1/3 border-yellow-800/20 border-b md:border-b-0 overflow-x-hidden">
       <h2 className="text-xs uppercase">Published</h2>
       <p>
         {new Date(date).toLocaleDateString("en-US", {
@@ -74,7 +74,7 @@ interface BlogArticleProps {
 
 function BlogArticle({ children }: BlogArticleProps) {
   return (
-    <article className="p-8 md:p-12 md:border-l border-yellow-800/20 flex-1 prose prose-stone prose-sm max-w-full">
+    <article className="p-8 md:p-12 md:border-l border-yellow-800/20 flex-1 min-w-0 prose prose-stone prose-sm max-w-full">
       {children}
     </article>
   );
