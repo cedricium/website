@@ -23,13 +23,12 @@
     "^#(.*)$",
     "^[./]"
   ],
-  "importOrderParserPlugins": [
-    "typescript",
-    "jsx",
-    "decorators-legacy"
-  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "decorators-legacy"],
   "plugins": [
     "prettier-plugin-tailwindcss",
     "@ianvs/prettier-plugin-sort-imports"
-  ]
+  ],
+
+  "printWidth": 80,
+  "proseWrap": "always"
 }
