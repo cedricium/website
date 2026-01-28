@@ -21,7 +21,7 @@ import { Marquee, MarqueeContent, MarqueeItem } from "@/components/ui/marquee";
 const EXPERIENCE = [
   {
     company: "Sagepost",
-    role: "Lead Software Engineer",
+    role: "Founding Software Engineer",
     from: new Date(2025, 4),
     to: null,
     website: "https://sagepost.ai",
